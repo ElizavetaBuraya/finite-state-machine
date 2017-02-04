@@ -12,7 +12,8 @@ class FSM {
         this.lastState = [];
         this.stateStack.push(this.curState);
       }
-      else throw new Error();
+      else
+        throw new Error();
     }
 
     /**
@@ -34,7 +35,8 @@ class FSM {
         this.stateStack.push(this.curState);
         this.lastState = []; //disable redo
       }
-      else throw new Error();
+      else
+        throw new Error();
     }
 
     /**
@@ -44,13 +46,13 @@ class FSM {
     trigger(event) {
       var canChangeState = false;
 
-          if (this.config.states[this.curState].transitions.hasOwnProperty(event))
-          {
-            this.curState = this.config.states[this.curState].transitions[event];
-            this.stateStack.push(this.curState);
-            this.lastState = []; //disable redo
-            canChangeState = true;
-          }
+      if (this.config.states[this.curState].transitions.hasOwnProperty(event))
+      {
+        this.curState = this.config.states[this.curState].transitions[event];
+        this.stateStack.push(this.curState);
+        this.lastState = []; //disable redo
+        canChangeState = true;
+      }
 
       if (canChangeState == false)
       {
@@ -74,12 +76,15 @@ class FSM {
      */
     getStates(event) {
       var getStatesArray = Object.keys(this.config.states);
+
       if (event == undefined)
       {
           return getStatesArray;
       }
-      else {
+      else
+      {
         var statesArray  = [];
+
         for (var key in getStatesArray)
         {
           if (this.config.states[getStatesArray[key]].transitions.hasOwnProperty(event))
